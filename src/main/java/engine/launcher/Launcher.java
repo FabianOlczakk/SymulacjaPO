@@ -19,36 +19,16 @@ public class Launcher {
     JTextField[] vectorValues;
     JTextField[] intValues;
 
-    public void run() {
+    public Launcher() {
         this.floatValues = new JTextField[9];
         this.vectorValues = new JTextField[2];
         this.intValues = new JTextField[7];
 
-        createAndShowGUI();
+        SwingUtilities.invokeLater(this::createAndShowGUI);
     }
 
-    public void runWithoutSettingsWindow() {
-        simulationParameters = new Parameters(
-                2560,
-                1440,
-                new Vector4f(0.0f, 1.0f, 0.7f, 1.0f),
-                new Vector4f(0.0f, 0.0f, 0.0f, 1.0f),
-                0.004f,
-                0.65f,
-                5_000_000,
-                0.0f,
-                SpawnMode.RANDOM_CIRCLE,
-                80.0f,
-                -10.0f,
-                20.0f,
-                1,
-                120.0f,
-                -3.0f,
-                60.0f,
-                1
-        );
-
-        Window window = new Window("Simulation", 1920, 1080, simulationParameters);
+    public Launcher(int windowWidth, int windowHeight, Parameters parameters) {
+        Window window = new Window("Simulation", windowWidth, windowHeight, parameters);
         window.run();
     }
 
@@ -75,12 +55,12 @@ public class Launcher {
         panel.add(new JLabel(""));
 
         panel.add(new JLabel("Window width"));
-        JTextField t01 = new JTextField("1920");
+        JTextField t01 = new JTextField("2560");
         panel.add(t01);
         intValues[5] = t01;
 
         panel.add(new JLabel("Window height"));
-        JTextField t02 = new JTextField("1080");
+        JTextField t02 = new JTextField("1440");
         panel.add(t02);
         intValues[6] = t02;
 

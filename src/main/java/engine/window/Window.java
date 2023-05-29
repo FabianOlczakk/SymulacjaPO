@@ -16,8 +16,10 @@ import static org.lwjgl.opengl.GL13.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.glFramebufferTexture;
+//import static org.lwjgl.opengl.GL42.glBindImageTexture;
+//import static org.lwjgl.opengl.GL43.GL_SHADER_STORAGE_BUFFER;
 import static org.lwjgl.opengl.GL42.glBindImageTexture;
-import static org.lwjgl.opengles.GLES31.GL_SHADER_STORAGE_BUFFER;
+import static org.lwjgl.opengl.GL43.GL_SHADER_STORAGE_BUFFER;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Window {
@@ -33,7 +35,6 @@ public class Window {
     private PlaneObject plane;
     private final Parameters simulationSettings;
     private final static int TARGET_UPS = 60;
-
 
     public Window(String title, int windowWidth, int windowHeight, Parameters simulationSettings) {
         this.title = title;
@@ -88,6 +89,7 @@ public class Window {
         glfwShowWindow(glfwWindow);
         glfwFocusWindow(glfwWindow);
 
+        //GL.createCapabilities();
         GL.createCapabilities();
 
         // Enable transparent textures
