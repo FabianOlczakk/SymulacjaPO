@@ -130,7 +130,7 @@ public class Renderer {
         computeShader.setUniform("turnSpeedB", simulationSettings.getTURN_SPEED_B());
         computeShader.setUniform("sensorOffsetDistB", simulationSettings.getSENSOR_OFFSET_DISTANCE_B());
         computeShader.setUniform("sensorSizeB", simulationSettings.getSENSOR_SIZE_B());
-        computeShader.setUniform("deltaTime", 1);
+        computeShader.setUniform("deltaTime", 1.0f);
         computeShader.setUniform("width", width);
         computeShader.setUniform("height", height);
 
@@ -140,7 +140,7 @@ public class Renderer {
         postProcessShader.bind();
         postProcessShader.setUniform("width", width);
         postProcessShader.setUniform("height", height);
-        postProcessShader.setUniform("deltaTime", 1);
+        postProcessShader.setUniform("deltaTime", 1.0f);
         postProcessShader.setUniform("diffuseSpeed", simulationSettings.getDIFFUSE_SPEED());
         postProcessShader.setUniform("evaporateSpeed", simulationSettings.getEVAPORATE_SPEED());
 

@@ -27,7 +27,7 @@ public class Launcher {
         createAndShowGUI();
     }
 
-    public void runWithoutLauncher() {
+    public void runWithoutSettingsWindow() {
         simulationParameters = new Parameters(
                 2560,
                 1440,
@@ -38,12 +38,10 @@ public class Launcher {
                 5_000_000,
                 0.0f,
                 SpawnMode.RANDOM_CIRCLE,
-
                 80.0f,
                 -10.0f,
                 20.0f,
                 1,
-
                 120.0f,
                 -3.0f,
                 60.0f,
@@ -113,6 +111,7 @@ public class Launcher {
 
         panel.add(new JLabel("Spawn mode"));
         spawnMode = new JComboBox(SpawnMode.values());
+        spawnMode.getModel().setSelectedItem(SpawnMode.RANDOM_CIRCLE);
         panel.add(spawnMode);
 
         JLabel l2 = new JLabel("A cell settings");
@@ -234,6 +233,7 @@ public class Launcher {
         frame.dispose();
 
         Window window = new Window("Simulation", windowWidth, windowHeight, simulationParameters);
+        showMessageDialog(null, "Press space to run the simulation.");
         window.run();
     }
 }

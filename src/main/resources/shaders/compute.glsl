@@ -7,39 +7,23 @@ layout(std430, binding = 2) buffer Pos {
 };
 
 uniform vec4 AColor;
-
 uniform float sensorAngleSpacingA;
-
 uniform float turnSpeedA;
-
 uniform float sensorOffsetDistA;
-
 uniform int sensorSizeA;
-
-
 uniform vec4 BColor;
-
 uniform float sensorAngleSpacingB;
-
 uniform float turnSpeedB;
-
 uniform float sensorOffsetDistB;
-
 uniform int sensorSizeB;
-
-
 uniform float deltaTime;
-
 uniform int width;
-
 uniform int height;
-
 
 float sensorAngleSpacing;
 float turnSpeed;
 float sensorOffsetDist;
 int sensorSize;
-
 int blurSize = 1;
 
 float rand(vec2 co){
@@ -82,7 +66,6 @@ float sense(vec4 agentT, float sensorAngleSpacing) {
                 {
                     sum += imageLoad(img_output,pos).x - imageLoad(img_output,pos).z;
                 }
-
             }
         }
     }
@@ -135,28 +118,19 @@ void main() {
         agent[id].z += randomSteerStrength * turnSpeed * deltaTime;
     }
 
-
-
-
-
     vec2 direction = vec2(cos(agent[id].z),sin(agent[id].z));
     vec2 newPos = vec2(agent[id].x,agent[id].y) + direction;
-
 
     if(newPos.x < 0 || newPos.x >= width || newPos.y < 0 || newPos.y >= height) {
         newPos.x = min(width - 1, max(0, newPos.x));
         newPos.y = min(height - 1, max(0, newPos.y));
         agent[id].z = scaleRandom10(random) * 2 * 3.14159;
-
-
     }
 
     agent[id].x = newPos.x;
     agent[id].y = newPos.y;
 
-
     vec4 oldCol = imageLoad(img_output, ivec2(newPos.x,newPos.y));
-
     vec4 newCol;
 
     // output to a specific pixel in the image
@@ -169,6 +143,5 @@ void main() {
     }
 
     imageStore(img_output, ivec2(newPos.x,newPos.y), newCol);
-
 }
 
