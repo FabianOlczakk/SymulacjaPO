@@ -9,12 +9,23 @@ import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
 
+/**
+ * The PlaneObject class represents a 2D plane object in the simulation.
+ * It extends the Object class and initializes its own mesh and texture.
+ */
 public class PlaneObject extends Object {
 
+    /**
+     * Constructor for the PlaneObject class.
+     * Initializes the plane object by calling the init() method.
+     */
     public PlaneObject() {
         init();
     }
 
+    /**
+     * Initializes the plane object by creating a mesh and setting its position, rotation, and scale.
+     */
     public void init() {
         createMesh();
         this.setPosition(new Vector3f(0.5f, 0.5f, 0.0f));
@@ -22,6 +33,9 @@ public class PlaneObject extends Object {
         this.setScale(new Vector3f(0.5f, 0.5f, 0.5f));
     }
 
+    /**
+     * Creates the mesh for the plane object with vertex positions, texture coordinates, and indices.
+     */
     public void createMesh() {
         float[] vertexPositions = {
                 -1f, -1f, 0,  // Bottom left
@@ -45,11 +59,14 @@ public class PlaneObject extends Object {
         this.setMesh(new Mesh(vertexPositions, textureCoordinates, indices));
     }
 
+    /**
+     * Renders the plane object by binding the texture and mesh, then drawing the elements using OpenGL.
+     */
     public void render() {
-        if(this.getTexture() != null){
-            //Activate first texture Bank
+        if (this.getTexture() != null) {
+            // Activate first texture bank
             glActiveTexture(GL_TEXTURE0);
-            //Bind texture
+            // Bind texture
             glBindTexture(GL_TEXTURE_2D, this.getTexture().getTextureID());
         }
 
@@ -57,6 +74,6 @@ public class PlaneObject extends Object {
         glDrawElements(GL_TRIANGLES, this.getMesh().getVertexCount(), GL_UNSIGNED_INT, 0);
 
         glBindVertexArray(0);
-        glBindTexture(GL_TEXTURE_2D,0);
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 }

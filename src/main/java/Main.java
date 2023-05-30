@@ -3,11 +3,20 @@ import engine.launcher.Parameters;
 import engine.launcher.SpawnMode;
 import org.joml.Vector4f;
 
+/**
+ * The main class responsible for launching the simulation.
+ */
 public class Main {
 
+    /**
+     * The main method that launches the simulation.
+     *
+     * @param args Arguments passed to the program.
+     */
     public static void main(String[] args) {
         Launcher launcher;
 
+        // Configure simulation parameters
         Parameters simulationParameters = new Parameters(
                 2560,
                 1440,
@@ -28,11 +37,10 @@ public class Main {
                 1
         );
 
-        // Run with settings window
+        // Launch the simulation with a settings window
         launcher = new Launcher();
 
-        //Run without settings window
-        //launcher = new Launcher(2560, 1440, simulationParameters);
-
+        // Alternative option: launch the simulation without a settings window
+        // launcher = new Launcher(2560, 1440, simulationParameters);
     }
 }

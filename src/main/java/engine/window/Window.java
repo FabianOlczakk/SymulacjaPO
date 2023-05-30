@@ -36,6 +36,14 @@ public class Window {
     private final Parameters simulationSettings;
     private final static int TARGET_UPS = 60;
 
+    /**
+     * Constructs a Window object with the specified title, window dimensions, and simulation settings.
+     *
+     * @param title             The title of the window.
+     * @param windowWidth       The width of the window in pixels.
+     * @param windowHeight      The height of the window in pixels.
+     * @param simulationSettings The simulation settings.
+     */
     public Window(String title, int windowWidth, int windowHeight, Parameters simulationSettings) {
         this.title = title;
         this.windowWidth = windowWidth;
@@ -45,7 +53,10 @@ public class Window {
         this.textureHeight = simulationSettings.getHEIGHT();
     }
 
-    public void run(){
+    /**
+     * Initializes the window, timer, renderer, and plane objects.
+     */
+    public void run() {
         try {
             init();
             loop();
@@ -53,13 +64,17 @@ public class Window {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Initializes the game.
+     *
+     * @throws Exception if initialization fails.
+     */
     private void init() throws Exception {
         // Error callback
         GLFWErrorCallback.createPrint(System.err).set();
 
         // Initializing GLFW
-        if(!glfwInit()) {
+        if (!glfwInit()) {
             throw new IllegalStateException("Unable to initialize GLFW");
         }
 
@@ -78,18 +93,18 @@ public class Window {
             throw new IllegalStateException("Failed to create the GLFW window.");
         }
 
-        // Set OpenGl content to current window
+        // Set OpenGL context to current window
         glfwMakeContextCurrent(glfwWindow);
 
         // Set keyboard callback
         GLFWKeyCallback keyCallback = new KeyboardInput();
         glfwSetKeyCallback(glfwWindow, keyCallback);
 
-        // Set window to be visible
+        // Set window to be visible and focused
         glfwShowWindow(glfwWindow);
         glfwFocusWindow(glfwWindow);
 
-        //GL.createCapabilities();
+        // Create OpenGL capabilities
         GL.createCapabilities();
 
         // Enable transparent textures
@@ -99,7 +114,7 @@ public class Window {
         glEnable(GL_STENCIL_TEST);
         glEnable(GL_DEPTH_TEST);
 
-        //Initializing timer
+        // Initializing timer
         timer = new Timer();
 
         // Initializing renderer
@@ -122,7 +137,7 @@ public class Window {
         // Set plane texture
         plane.setTexture(new Texture(textureID, textureWidth, textureHeight));
 
-        // Create temp texture
+        // Create temporary texture
         int tempTextureID = glGenTextures();
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, tempTextureID);
@@ -130,21 +145,24 @@ public class Window {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, textureWidth, textureHeight, 0, GL_RGBA, GL_FLOAT, NULL);
 
         int framebuffer = glGenBuffers();
         glBindBuffer(GL_FRAMEBUFFER, framebuffer);
         glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, tempTextureID, 0);
 
-        renderer.init();
+        renderer.init(); // Initialize the renderer
     }
 
+    /**
+     * Main game loop.
+     * Renders the game and updates the simulation.
+     */
     private void loop() {
         float accumulator = 0f;
         boolean simulation = false;
 
-        render();
+        render(); // Initial render before entering the loop
 
         while (!glfwWindowShouldClose(glfwWindow)) {
 
@@ -156,36 +174,50 @@ public class Window {
                 accumulator -= interval;
             }
 
+            // Check if the space key is pressed to start/stop the simulation
             if(KeyboardInput.isKeyDown(GLFW_KEY_SPACE)) {
-                simulation = true;
+                simulation = !simulation; // Toggle the simulation state
             }
 
             if (simulation) {
-                render();
+                render(); // Render the game during simulation
             } else {
-                glfwPollEvents();
+                glfwPollEvents(); // Process input events when simulation is paused
             }
         }
     }
 
+    /**
+     * Renders the game and updates the simulation.
+     */
     private void render() {
-        int ssbo = glGenBuffers();
-        glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
-        float[] agents = {0};
-        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 3, ssbo);
-        glBufferData(GL_SHADER_STORAGE_BUFFER, agents, GL_DYNAMIC_COPY);
-        glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+        int ssbo = glGenBuffers(); // Generate a new shader storage buffer object (SSBO)
+        glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo); // Bind the SSBO
+        float[] agents = {0}; // Placeholder for agent data
+        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 3, ssbo); // Bind the SSBO to shader binding point 3
+        glBufferData(GL_SHADER_STORAGE_BUFFER, agents, GL_DYNAMIC_COPY); // Set the data of the SSBO
+        glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0); // Unbind the SSBO
 
-        renderer.render(this, plane);
+        renderer.render(this, plane); // Perform game rendering
 
-        glfwSwapBuffers(glfwWindow);
-        glfwPollEvents();
+        glfwSwapBuffers(glfwWindow); // Swap the front and back buffers
+        glfwPollEvents(); // Process input events
     }
 
+    /**
+     * Retrieves the width of the game window.
+     *
+     * @return The width of the window.
+     */
     public int getWindowWidth() {
         return windowWidth;
     }
 
+    /**
+     * Retrieves the height of the game window.
+     *
+     * @return The height of the window.
+     */
     public int getWindowHeight() {
         return windowHeight;
     }

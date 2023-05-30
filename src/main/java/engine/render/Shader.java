@@ -11,6 +11,12 @@ import java.util.Map;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL43.GL_COMPUTE_SHADER;
 
+/**
+ * The Shader class is responsible for managing and handling shader programs in OpenGL.
+ */
+/**
+ * The Shader class is responsible for managing and handling shader programs in OpenGL.
+ */
 public class Shader {
 
     private final int programID;
@@ -18,6 +24,11 @@ public class Shader {
     private int fragmentShaderID;
     private final Map<String, Integer> uniforms;
 
+    /**
+     * Constructs a new Shader and initializes the shader program.
+     *
+     * @throws Exception If a shader program cannot be created.
+     */
     public Shader() throws Exception {
         uniforms = new HashMap<>();
         programID = glCreateProgram();
@@ -27,6 +38,14 @@ public class Shader {
         }
     }
 
+    /**
+     * Creates a shader of the specified type using the provided shader resource.
+     *
+     * @param shaderResource The shader resource containing the shader code.
+     * @param shaderType     The type of shader, such as GL_VERTEX_SHADER or GL_FRAGMENT_SHADER.
+     * @return The ID of the created shader.
+     * @throws Exception If a shader cannot be created or compiled.
+     */
     private int createShader(String shaderResource, int shaderType) throws Exception {
         int shaderID = glCreateShader(shaderType);
 
@@ -114,4 +133,3 @@ public class Shader {
         glUseProgram(0);
     }
 }
-

@@ -2,30 +2,55 @@ package engine.launcher;
 
 import org.joml.Vector4f;
 
+/**
+ * The Parameters class represents the various settings and parameters
+ * required for the simulation.
+ */
 public class Parameters {
-    // MAIN SETTINGS
-    private final int WIDTH;
-    private final int HEIGHT;
-    private final SpawnMode SPAWN_MODE;
-    private final float EVAPORATE_SPEED;
-    private final float DIFFUSE_SPEED;
-    private final int AGENTS_COUNT;
+    // Main settings
+    private final int WIDTH;               // Width of the simulation window
+    private final int HEIGHT;              // Height of the simulation window
+    private final SpawnMode SPAWN_MODE;    // Spawn mode for the simulation
+    private final float EVAPORATE_SPEED;   // Evaporation speed setting
+    private final float DIFFUSE_SPEED;     // Diffusion speed setting
+    private final int AGENTS_COUNT;        // Number of agents in the simulation
 
-    // A CELLS SETTINGS
-    private final Vector4f CELL_COLOR_A;
-    private final float SENSOR_ANGLE_SPACING_A;
-    private final float TURN_SPEED_A;
-    private final float SENSOR_OFFSET_DISTANCE_A;
-    private final int SENSOR_SIZE_A;
+    // A cells settings
+    private final Vector4f CELL_COLOR_A;          // Color of A cells
+    private final float SENSOR_ANGLE_SPACING_A;   // Sensor angle spacing for A cells
+    private final float TURN_SPEED_A;             // Turn speed for A cells
+    private final float SENSOR_OFFSET_DISTANCE_A; // Sensor offset distance for A cells
+    private final int SENSOR_SIZE_A;              // Sensor size for A cells
 
-    // B CELLS SETTINGS
-    private final float CELL_B_PROBABILITY;
-    private final Vector4f CELL_COLOR_B;
-    private final float SENSOR_ANGLE_SPACING_B;
-    private final float TURN_SPEED_B;
-    private final float SENSOR_OFFSET_DISTANCE_B;
-    private final int SENSOR_SIZE_B;
+    // B cells settings
+    private final float CELL_B_PROBABILITY;       // Probability of spawning a B cell
+    private final Vector4f CELL_COLOR_B;          // Color of B cells
+    private final float SENSOR_ANGLE_SPACING_B;   // Sensor angle spacing for B cells
+    private final float TURN_SPEED_B;             // Turn speed for B cells
+    private final float SENSOR_OFFSET_DISTANCE_B; // Sensor offset distance for B cells
+    private final int SENSOR_SIZE_B;              // Sensor size for B cells
 
+    /**
+     * Constructor that initializes the parameters with the provided values.
+     *
+     * @param WIDTH                   The width of the simulation window.
+     * @param HEIGHT                  The height of the simulation window.
+     * @param CELL_COLOR_A            The color of A cells.
+     * @param CELL_COLOR_B            The color of B cells.
+     * @param EVAPORATE_SPEED         The evaporation speed setting.
+     * @param DIFFUSE_SPEED           The diffusion speed setting.
+     * @param AGENTS_COUNT            The number of agents in the simulation.
+     * @param CELL_B_PROBABILITY      The probability of spawning a B cell.
+     * @param SPAWN_MODE              The spawn mode setting.
+     * @param SENSOR_ANGLE_SPACING_A  The sensor angle spacing for A cells.
+     * @param TURN_SPEED_A            The turn speed for A cells.
+     * @param SENSOR_OFFSET_DISTANCE_A The sensor offset distance for A cells.
+     * @param SENSOR_SIZE_A           The sensor size for A cells.
+     * @param SENSOR_ANGLE_SPACING_B  The sensor angle spacing for B cells.
+     * @param TURN_SPEED_B            The turn speed for B cells.
+     * @param SENSOR_OFFSET_DISTANCE_B The sensor offset distance for B cells.
+     * @param SENSOR_SIZE_B           The sensor size for B cells.
+     */
     public Parameters(int WIDTH, int HEIGHT, Vector4f CELL_COLOR_A, Vector4f CELL_COLOR_B, float EVAPORATE_SPEED, float DIFFUSE_SPEED, int AGENTS_COUNT, float CELL_B_PROBABILITY, SpawnMode SPAWN_MODE, float SENSOR_ANGLE_SPACING_A, float TURN_SPEED_A, float SENSOR_OFFSET_DISTANCE_A, int SENSOR_SIZE_A, float SENSOR_ANGLE_SPACING_B, float TURN_SPEED_B, float SENSOR_OFFSET_DISTANCE_B, int SENSOR_SIZE_B) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
@@ -45,7 +70,6 @@ public class Parameters {
         this.SENSOR_OFFSET_DISTANCE_B = SENSOR_OFFSET_DISTANCE_B;
         this.SENSOR_SIZE_B = SENSOR_SIZE_B;
     }
-
     public int getWIDTH() {
         return WIDTH;
     }
