@@ -34,8 +34,15 @@ Symulacja jest w stanie wyświetlać bardzo dużą ilość agentów na raz, poni
 - Używając systemu macOS należy uruchomić symulacje z opcją VM **-XstartOnFirstThread**
 - Preferuje uruchomić symulacje na komputerze z dedykowaną kartą graficzną
 - W razie widocznego spadku liczby klatek na sekundę lub wolnego przebiegu symulacji należy zmniejszyć liczbę agentów (**AgentsCount**) oraz ustawić parametr **SensorSize** na 1
+
+
+## Przykłady działania
+- [Film 1](https://drive.google.com/file/d/1CH20Elts1MaTj9sAusZillSwuzq2FqB3/view?usp=sharing)
+- [Film 2](https://drive.google.com/file/d/1CH20Elts1MaTj9sAusZillSwuzq2FqB3/view?usp=sharing)
+
+
 ## Autorzy
 
 - [@FabianOlczakk](https://github.com/FabianOlczakk)
-- Michał Patronik
+- @Michał Patronik
 
