@@ -5,7 +5,7 @@ Projekt pozwala symulować zachowanie komórek (agentów) biologicznych według 
 
 Na mapie można umieścić maksymalnie dwa rodzaje (gatunki) komórek - A oraz B, które będą się wzajemnie unikać oraz walczyć o teren.
 
-Symulacja jest w stanie wyświetlać bardzo dużą ilość agentów na raz, ponieważ obliczenia dla każdego z nich są wykonywane przez procesor graficzny komputera dzięki użyciu shadera obliczeniowego (compute shadera). Pozwala to wykonywać obliczenia dla milionów komórek na raz, a przy użyciu procesora cpu był ich w stanie udźwignąć jedynie kilka tysięcy.
+Symulacja jest w stanie wyświetlać bardzo dużą ilość agentów na raz, ponieważ obliczenia dla każdego z nich są wykonywane przez procesor graficzny komputera dzięki użyciu shadera obliczeniowego (compute shadera). Pozwala to wykonywać obliczenia dla milionów komórek na raz, a przy użyciu procesora cpu jedynie kilka tysięcy.
 
 
 ## Opis parametrów symulacji
@@ -20,8 +20,8 @@ Symulacja jest w stanie wyświetlać bardzo dużą ilość agentów na raz, poni
 - `(enum) Spawn mode` - początkowe ułożenie komórek na mapie
 - `(float) Cells probability` - określa prawdopodobieństwo występowania komórek z gatunku B
 - `(Vector3f) Color` - kolor gatunku **(kolor zmienia również zachowanie komórek)**
-- `(float) Sensor angle spacing` - określa jak daleko widzi komórka pod ką`m, w którym się znajduje
-- `(float) Turn speed` - określa jak szybko komórki mogą zmieniać kieruek
+- `(float) Sensor angle spacing` - określa jak daleko widzi komórka pod kątem, w którym się znajduje
+- `(float) Turn speed` - określa jak szybko komórki mogą zmieniać kierunek
 - `(float) Sensor offset distance` - przesunięcie sensora
 - `(int) Sensor size` - rozmiar sensora
 
@@ -29,7 +29,7 @@ Symulacja jest w stanie wyświetlać bardzo dużą ilość agentów na raz, poni
 ## Wymagania i uwagi
 - JDK 18
 - OpenGL 4
-- Symulacja nie działa na procesorach o architektórze ARM
+- Symulacja nie działa na procesorach o architekturze ARM
 - Używając systemu macOS należy uruchomić symulacje z opcją VM `-XstartOnFirstThread`
 - Preferuje uruchomić symulacje na komputerze z dedykowaną kartą graficzną
 - W razie widocznego spadku liczby klatek na sekundę lub wolnego przebiegu symulacji należy zmniejszyć liczbę agentów (`AgentsCount`) lub ustawić parametr `SensorSize` na 1
@@ -78,5 +78,3 @@ Poniższe presety są dostępne do wybrania w oknie ustawień programu.
 
 - [@FabianOlczakk](https://github.com/FabianOlczakk)
 - @Michał Patronik
-
-
