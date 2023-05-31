@@ -44,35 +44,48 @@ Symulacja jest w stanie wyświetlać bardzo dużą ilość agentów na raz, poni
 
 Poniższe presety są dostępne do wybrania w oknie ustawień programu.
 
+
 - `Preset_1`
 
 ![1.1](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/1.1.png)
 ![1.2](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/1.2.png)
+
 
 - `Preset_2`
 
 ![2.1](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/2.1.png)
 ![2.2](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/2.2.png)
 
+
 - `Preset_3`
 
 ![3.1](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/3.1.png)
 ![3.2](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/3.2.png)
+
 
 - `Preset_4`
 
 ![4.1](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/4.1.png)
 ![4.2](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/4.2.png)
 
+
 - `Preset_5`
 
 ![5.1](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/5.1.png)
 ![5.2](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/5.2.png)
 
+
 - `Preset_6`
 
 ![6.1](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/6.1.png)
 ![6.2](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/6.2.png)
+
+
+- `Preset_7`
+
+![7.1](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/7.1.png)
+![7.2](https://github.com/FabianOlczakk/SymulacjaPO/blob/master/images/7.2.png)
+
 
 ## Autorzy
 

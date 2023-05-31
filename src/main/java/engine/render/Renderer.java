@@ -173,7 +173,7 @@ public class Renderer {
         computeShader.setUniform("width", width);
         computeShader.setUniform("height", height);
 
-        // Dispatch the comput3 shader
+        // Dispatch the compute shader
         glDispatchCompute(32, 16, 16);
         // Ensure that the image operations are completed before using the results
         glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
