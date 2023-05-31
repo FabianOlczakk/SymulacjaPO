@@ -20,20 +20,20 @@ public class Main {
         Parameters simulationParameters = new Parameters(
                 2560,
                 1440,
-                new Vector4f(0.0f, 1.0f, 0.7f, 1.0f),
-                new Vector4f(0.0f, 0.0f, 0.0f, 1.0f),
-                0.004f,
-                0.65f,
-                5_000_000,
-                0.0f,
+                new Vector4f(0.4f, 0.3f, 0.3f, 1.0f),
+                new Vector4f(0.3f, 0.6f, 0.5f, 1.0f),
+                0.001f,
+                0.30f,
+                15_000_000,
+                0.2f,
                 SpawnMode.RANDOM_CIRCLE,
-                80.0f,
-                -10.0f,
-                20.0f,
+                50.0f,
+                -15.0f,
+                50.0f,
                 1,
-                120.0f,
-                -3.0f,
-                60.0f,
+                110.0f,
+                -15.0f,
+                10.0f,
                 1
         );
 
@@ -41,6 +41,6 @@ public class Main {
         launcher = new Launcher();
 
         // Alternative option: launch the simulation without a settings window
-        // launcher = new Launcher(2560, 1440, simulationParameters);
+        //launcher = new Launcher(1920, 1080, simulationParameters);
     }
 }
