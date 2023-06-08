@@ -8,6 +8,10 @@ Na mapie można umieścić maksymalnie dwa rodzaje (gatunki) komórek - A oraz B
 Symulacja jest w stanie wyświetlać bardzo dużą ilość agentów na raz, ponieważ obliczenia dla każdego z nich są wykonywane przez procesor graficzny komputera dzięki użyciu shadera obliczeniowego (compute shadera). Pozwala to wykonywać obliczenia dla milionów komórek na raz, a przy użyciu procesora cpu jedynie kilka tysięcy.
 
 
+## Dokumentacja
+- [link](https://fabianolczakk.github.io/SymulacjaPO/)
+
+
 ## Opis parametrów symulacji
 - `(enum) Presets` - pozwala wybrać zapisane presety parametrów
 - `(int) Window width` - szerokość okna
