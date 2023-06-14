@@ -3,7 +3,7 @@ package engine.render;
 import engine.launcher.Parameters;
 import engine.launcher.SpawnMode;
 import engine.objects.PlaneObject;
-import engine.utils.ResourceLoader;
+import engine.utils.ResourceManager;
 import engine.utils.Transformation;
 import engine.window.Window;
 import org.joml.Matrix4f;
@@ -50,15 +50,15 @@ public class Renderer {
 
         // Create and configure the render shader
         renderShader = new Shader();
-        renderShader.createVertexShader(ResourceLoader.loadResource("/shaders/vertex.glsl"));
-        renderShader.createFragmentShader(ResourceLoader.loadResource("/shaders/fragment.glsl"));
+        renderShader.createVertexShader(ResourceManager.loadResource("/shaders/vertex.glsl"));
+        renderShader.createFragmentShader(ResourceManager.loadResource("/shaders/fragment.glsl"));
         renderShader.link();
         renderShader.createUniforms("modelViewMatrix");
         renderShader.createUniforms("texture_sampler");
 
-        // Create and configure the comput3 shader
+        // Create and configure the compute shader
         computeShader = new Shader();
-        computeShader.createComputeShader(ResourceLoader.loadResource("/shaders/compute.glsl"));
+        computeShader.createComputeShader(ResourceManager.loadResource("/shaders/compute.glsl"));
         computeShader.link();
         computeShader.createUniforms("AColor");
         computeShader.createUniforms("sensorAngleSpacingA");
@@ -84,7 +84,7 @@ public class Renderer {
 
         // Create and configure the post-processing shader
         postProcessShader = new Shader();
-        postProcessShader.createComputeShader(ResourceLoader.loadResource("/shaders/postProcess.glsl"));
+        postProcessShader.createComputeShader(ResourceManager.loadResource("/shaders/postProcess.glsl"));
         postProcessShader.link();
         postProcessShader.createUniforms("width");
         postProcessShader.createUniforms("height");

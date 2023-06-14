@@ -2,17 +2,21 @@ package engine.launcher;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import engine.utils.ResourceManager;
 import engine.window.Window;
 import org.joml.Vector4f;
 
+import static engine.utils.ParameterParser.parseParameters;
+import static engine.utils.ResourceManager.*;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
@@ -24,7 +28,7 @@ public class Launcher {
     private JFrame frame;
     private JPanel panel;
     private JComboBox spawnMode;
-    private JComboBox<String> presetsComboBox;
+    private JComboBox presetsComboBox;
     private JButton savePresetButton;
     private JButton deletePresetButton;
     private int windowWidth;
@@ -85,8 +89,6 @@ public class Launcher {
             l1.setFont(boldFont);
             panel.add(l1);
             panel.add(new JLabel(""));
-
-
 
             panel.add(new JLabel("Window width"));
             JTextField t01 = new JTextField("");
@@ -225,7 +227,14 @@ public class Launcher {
             panel.add(new JLabel(""));
 
             JButton saveButton = new JButton("Run simulation");
-            saveButton.addActionListener(e -> checkValuesDataTypesAndCreateParametersObject());
+            saveButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (parseParameters(intValues, floatValues, vectorValues, spawnMode)) {
+                        runSimulation();
+                    }
+                }
+            });
             panel.add(saveButton);
         }
 
@@ -235,8 +244,7 @@ public class Launcher {
         l1.setFont(boldFont);
         panel.add(l1);
 
-        presetsComboBox = new JComboBox<>();
-        loadPresets(); // Load available presets
+        presetsComboBox = ResourceManager.loadPresets();
         presetsComboBox.getModel().setSelectedItem("");
         presetsComboBox.addActionListener(e -> loadParametersFromPreset((String) presetsComboBox.getSelectedItem()));
         panel.add(presetsComboBox);
@@ -252,59 +260,18 @@ public class Launcher {
         panel.add(new JLabel(""));
     }
 
-
-        /**
-         * Checks the data types of the input values and creates a Parameters object.
-         */
-        private void checkValuesDataTypesAndCreateParametersObject() {
-            try {
-                windowWidth = Integer.parseInt(intValues[5].getText());
-                windowHeight = Integer.parseInt(intValues[6].getText());
-
-                simulationParameters = new Parameters(
-                        Integer.parseInt(intValues[0].getText()),
-                        Integer.parseInt(intValues[1].getText()),
-                        new Vector4f(
-                                Float.parseFloat(vectorValues[0].getText().split(",")[0]),
-                                Float.parseFloat(vectorValues[0].getText().split(",")[1]),
-                                Float.parseFloat(vectorValues[0].getText().split(",")[2]),
-                                Float.parseFloat(vectorValues[0].getText().split(",")[3])
-                        ),
-                        new Vector4f(
-                                Float.parseFloat(vectorValues[1].getText().split(",")[0]),
-                                Float.parseFloat(vectorValues[1].getText().split(",")[1]),
-                                Float.parseFloat(vectorValues[1].getText().split(",")[2]),
-                                Float.parseFloat(vectorValues[1].getText().split(",")[3])
-                        ),
-                        Float.parseFloat(floatValues[0].getText()),
-                        Float.parseFloat(floatValues[1].getText()),
-                        Integer.parseInt(intValues[2].getText()),
-                        Float.parseFloat(floatValues[5].getText()),
-                        (SpawnMode) spawnMode.getSelectedItem(),
-                        Float.parseFloat(floatValues[2].getText()),
-                        Float.parseFloat(floatValues[3].getText()),
-                        Float.parseFloat(floatValues[4].getText()),
-                        Integer.parseInt(intValues[3].getText()),
-                        Float.parseFloat(floatValues[6].getText()),
-                        Float.parseFloat(floatValues[7].getText()),
-                        Float.parseFloat(floatValues[8].getText()),
-                        Integer.parseInt(intValues[4].getText())
-                );
-
-                runSimulation();
-
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                // Show an error message if there are invalid input values
-                showMessageDialog(null, "Invalid values");
-            }
-        }
-
     /**
      * Runs the simulation with the specified settings and disposes of the frame.
      */
     private void runSimulation() {
         frame.dispose();
-        saveParametersToFile("simulation_parameters.properties");
+        saveLauncherParametersToFile(
+                "simulation_parameters.properties",
+                intValues,
+                floatValues,
+                vectorValues,
+                spawnMode
+                );
 
         Window window = new Window("Simulation", windowWidth, windowHeight, simulationParameters);
         showMessageDialog(null, "Press space to run the simulation.");
@@ -312,86 +279,14 @@ public class Launcher {
     }
 
     /**
-     * Saves the current parameters to a file.
-     */
-    private void saveParametersToFile(String filepath) {
-        Properties properties = new Properties();
-
-        for (int i = 0; i < intValues.length; i++) {
-            properties.setProperty("intValues_" + i, intValues[i].getText());
-        }
-        for (int i = 0; i < floatValues.length; i++) {
-            properties.setProperty("floatValues_" + i, floatValues[i].getText());
-        }
-        for (int i = 0; i < vectorValues.length; i++) {
-            properties.setProperty("vectorValues_" + i, vectorValues[i].getText());
-        }
-        properties.setProperty("spawnMode", spawnMode.getSelectedItem().toString());
-
-        try (FileOutputStream outputStream = new FileOutputStream(filepath)) {
-            properties.store(outputStream, "Simulation parameters");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Loads the parameters from a file, if it exists.
      */
     private void loadParametersFromFile(String filepath) {
-        File file = new File(filepath);
-        if (!file.exists()) {
-            return;
-        }
-
-        Properties properties = new Properties();
-        try (FileInputStream inputStream = new FileInputStream(filepath)) {
-            properties.load(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        for (int i = 0; i < intValues.length; i++) {
-            String value = properties.getProperty("intValues_" + i);
-            if (value != null) {
-                intValues[i].setText(value);
-            }
-        }
-        for (int i = 0; i < floatValues.length; i++) {
-            String value = properties.getProperty("floatValues_" + i);
-            if (value != null) {
-                floatValues[i].setText(value);
-            }
-        }
-        for (int i = 0; i < vectorValues.length; i++) {
-            String value = properties.getProperty("vectorValues_" + i);
-            if (value != null) {
-                vectorValues[i].setText(value);
-            }
-        }
-        String selectedSpawnMode = properties.getProperty("spawnMode");
-        if (selectedSpawnMode != null) {
-            spawnMode.getModel().setSelectedItem(SpawnMode.valueOf(selectedSpawnMode));
-        }
-    }
-
-    /**
-     * Loads the presets from the "presets" folder.
-     * If the folder doesn't exist, it creates one.
-     * Adds the preset names to the presetsComboBox.
-     */
-    private void loadPresets() {
-        File presetsFolder = new File("presets");
-        if (!presetsFolder.exists()) {
-            presetsFolder.mkdir();
-        }
-
-        String[] presetFiles = presetsFolder.list((dir, name) -> name.endsWith(".properties"));
-        if (presetFiles != null) {
-            for (String presetFile : presetFiles) {
-                presetsComboBox.addItem(presetFile.substring(0, presetFile.length() - ".properties".length()));
-            }
-        }
+        Properties properties = ResourceManager.loadParametersFromFile(filepath);
+        floatValues = loadFloatParametersFromFile(properties);
+        intValues = loadIntParametersFromFile(properties);
+        vectorValues = loadVectorParametersFromFile(properties);
+        spawnMode = loadSpawnModeParameterFromFile(properties);
     }
 
     /**
@@ -416,7 +311,13 @@ public class Launcher {
     private void savePreset() {
         String presetName = JOptionPane.showInputDialog("Enter preset name:");
         if (presetName != null && !presetName.isBlank()) {
-            saveParametersToFile("presets/" + presetName + ".properties");
+            saveLauncherParametersToFile(
+                    "presets/" + presetName + ".properties",
+                    intValues,
+                    floatValues,
+                    vectorValues,
+                    spawnMode
+                    );
 
             if (!presetExists(presetName)) {
                 presetsComboBox.addItem(presetName);

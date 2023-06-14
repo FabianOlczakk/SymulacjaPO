@@ -13,7 +13,7 @@ import static org.lwjgl.opengl.GL30.glBindVertexArray;
  * The PlaneObject class represents a 2D plane object in the simulation.
  * It extends the Object class and initializes its own mesh and texture.
  */
-public class PlaneObject extends Object {
+public class PlaneObject extends Object implements GameEngineObject{
 
     /**
      * Constructor for the PlaneObject class.
@@ -26,6 +26,7 @@ public class PlaneObject extends Object {
     /**
      * Initializes the plane object by creating a mesh and setting its position, rotation, and scale.
      */
+    @Override
     public void init() {
         createMesh();
         this.setPosition(new Vector3f(0.5f, 0.5f, 0.0f));
@@ -36,6 +37,7 @@ public class PlaneObject extends Object {
     /**
      * Creates the mesh for the plane object with vertex positions, texture coordinates, and indices.
      */
+    @Override
     public void createMesh() {
         float[] vertexPositions = {
                 -1f, -1f, 0,  // Bottom left
@@ -62,6 +64,7 @@ public class PlaneObject extends Object {
     /**
      * Renders the plane object by binding the texture and mesh, then drawing the elements using OpenGL.
      */
+    @Override
     public void render() {
         if (this.getTexture() != null) {
             // Activate first texture bank
