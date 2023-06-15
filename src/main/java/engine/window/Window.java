@@ -44,10 +44,10 @@ public class Window {
      * @param windowHeight      The height of the window in pixels.
      * @param simulationSettings The simulation settings.
      */
-    public Window(String title, int windowWidth, int windowHeight, Parameters simulationSettings) {
+    public Window(String title, Parameters simulationSettings) {
         this.title = title;
-        this.windowWidth = windowWidth;
-        this.windowHeight = windowHeight;
+        this.windowWidth = simulationSettings.getWINDOW_WIDTH();
+        this.windowHeight = simulationSettings.getWINDOW_HEIGHT();
         this.simulationSettings = simulationSettings;
         this.textureWidth = simulationSettings.getWIDTH();
         this.textureHeight = simulationSettings.getHEIGHT();
