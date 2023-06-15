@@ -51,12 +51,10 @@ public class Launcher {
     /**
      * Constructor that launches the simulation with the specified width, height, and parameters.
      *
-     * @param windowWidth      The width of the simulation window.
-     * @param windowHeight     The height of the simulation window.
      * @param parameters       The simulation parameters.
      */
-    public Launcher(int windowWidth, int windowHeight, Parameters parameters) {
-        Window window = new Window("Simulation", windowWidth, windowHeight, parameters);
+    public Launcher(Parameters parameters) {
+        Window window = new Window("Simulation", parameters);
         showMessageDialog(null, "Press space to run the simulation.");
         window.run();
     }
@@ -230,9 +228,8 @@ public class Launcher {
             saveButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (parseParameters(intValues, floatValues, vectorValues, spawnMode)) {
                         runSimulation();
-                    }
+
                 }
             });
             panel.add(saveButton);
@@ -273,7 +270,8 @@ public class Launcher {
                 spawnMode
                 );
 
-        Window window = new Window("Simulation", windowWidth, windowHeight, simulationParameters);
+        simulationParameters = parseParameters(intValues, floatValues, vectorValues, spawnMode);
+        Window window = new Window("Simulation", simulationParameters);
         showMessageDialog(null, "Press space to run the simulation.");
         window.run();
     }
@@ -283,10 +281,10 @@ public class Launcher {
      */
     private void loadParametersFromFile(String filepath) {
         Properties properties = ResourceManager.loadParametersFromFile(filepath);
-        floatValues = loadFloatParametersFromFile(properties);
-        intValues = loadIntParametersFromFile(properties);
-        vectorValues = loadVectorParametersFromFile(properties);
-        spawnMode = loadSpawnModeParameterFromFile(properties);
+        loadFloatParametersFromFile(properties, floatValues);
+        loadIntParametersFromFile(properties, intValues);
+        loadVectorParametersFromFile(properties, vectorValues);
+        loadSpawnModeParameterFromFile(properties, spawnMode);
     }
 
     /**

@@ -13,7 +13,7 @@ public class ParameterParser {
     /**
      * Checks the data types of the input values and creates a Parameters object.
      */
-    public static boolean parseParameters(JTextField[] intValues, JTextField[] floatValues, JTextField[] vectorValues, JComboBox spawnmode) {
+    public static Parameters parseParameters(JTextField[] intValues, JTextField[] floatValues, JTextField[] vectorValues, JComboBox spawnmode) {
         try {
             int windowWidth = Integer.parseInt(intValues[5].getText());
             int windowHeight = Integer.parseInt(intValues[6].getText());
@@ -21,7 +21,7 @@ public class ParameterParser {
             Parameters simulationParameters = new Parameters(
                     Integer.parseInt(intValues[0].getText()),
                     Integer.parseInt(intValues[1].getText()),
-                    new Vector4f(
+                    windowWidth, windowHeight, new Vector4f(
                             Float.parseFloat(vectorValues[0].getText().split(",")[0]),
                             Float.parseFloat(vectorValues[0].getText().split(",")[1]),
                             Float.parseFloat(vectorValues[0].getText().split(",")[2]),
@@ -48,12 +48,12 @@ public class ParameterParser {
                     Integer.parseInt(intValues[4].getText())
             );
 
-            return true;
+            return simulationParameters;
 
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             // Show an error message if there are invalid input values
             showMessageDialog(null, "Invalid values");
-            return false;
         }
+        return null;
     }
 }

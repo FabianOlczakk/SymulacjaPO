@@ -10,6 +10,8 @@ public class Parameters {
     // Main settings
     private final int WIDTH;               // Width of the simulation window
     private final int HEIGHT;              // Height of the simulation window
+    private final int WINDOW_WIDTH;        // Width of the window
+    private final int WINDOW_HEIGHT;       // Height of the window
     private final SpawnMode SPAWN_MODE;    // Spawn mode for the simulation
     private final float EVAPORATE_SPEED;   // Evaporation speed setting
     private final float DIFFUSE_SPEED;     // Diffusion speed setting
@@ -33,27 +35,31 @@ public class Parameters {
     /**
      * Constructor that initializes the parameters with the provided values.
      *
-     * @param WIDTH                   The width of the simulation window.
-     * @param HEIGHT                  The height of the simulation window.
-     * @param CELL_COLOR_A            The color of A cells.
-     * @param CELL_COLOR_B            The color of B cells.
-     * @param EVAPORATE_SPEED         The evaporation speed setting.
-     * @param DIFFUSE_SPEED           The diffusion speed setting.
-     * @param AGENTS_COUNT            The number of agents in the simulation.
-     * @param CELL_B_PROBABILITY      The probability of spawning a B cell.
-     * @param SPAWN_MODE              The spawn mode setting.
-     * @param SENSOR_ANGLE_SPACING_A  The sensor angle spacing for A cells.
-     * @param TURN_SPEED_A            The turn speed for A cells.
+     * @param WIDTH                    The width of the simulation window.
+     * @param HEIGHT                   The height of the simulation window.
+     * @param WINDOW_WIDTH             The width of the window.
+     * @param WINDOW_HEIGHT            The height of the window.
+     * @param CELL_COLOR_A             The color of A cells.
+     * @param CELL_COLOR_B             The color of B cells.
+     * @param EVAPORATE_SPEED          The evaporation speed setting.
+     * @param DIFFUSE_SPEED            The diffusion speed setting.
+     * @param AGENTS_COUNT             The number of agents in the simulation.
+     * @param CELL_B_PROBABILITY       The probability of spawning a B cell.
+     * @param SPAWN_MODE               The spawn mode setting.
+     * @param SENSOR_ANGLE_SPACING_A   The sensor angle spacing for A cells.
+     * @param TURN_SPEED_A             The turn speed for A cells.
      * @param SENSOR_OFFSET_DISTANCE_A The sensor offset distance for A cells.
-     * @param SENSOR_SIZE_A           The sensor size for A cells.
-     * @param SENSOR_ANGLE_SPACING_B  The sensor angle spacing for B cells.
-     * @param TURN_SPEED_B            The turn speed for B cells.
+     * @param SENSOR_SIZE_A            The sensor size for A cells.
+     * @param SENSOR_ANGLE_SPACING_B   The sensor angle spacing for B cells.
+     * @param TURN_SPEED_B             The turn speed for B cells.
      * @param SENSOR_OFFSET_DISTANCE_B The sensor offset distance for B cells.
-     * @param SENSOR_SIZE_B           The sensor size for B cells.
+     * @param SENSOR_SIZE_B            The sensor size for B cells.
      */
-    public Parameters(int WIDTH, int HEIGHT, Vector4f CELL_COLOR_A, Vector4f CELL_COLOR_B, float EVAPORATE_SPEED, float DIFFUSE_SPEED, int AGENTS_COUNT, float CELL_B_PROBABILITY, SpawnMode SPAWN_MODE, float SENSOR_ANGLE_SPACING_A, float TURN_SPEED_A, float SENSOR_OFFSET_DISTANCE_A, int SENSOR_SIZE_A, float SENSOR_ANGLE_SPACING_B, float TURN_SPEED_B, float SENSOR_OFFSET_DISTANCE_B, int SENSOR_SIZE_B) {
+    public Parameters(int WIDTH, int HEIGHT, int WINDOW_WIDTH, int WINDOW_HEIGHT, Vector4f CELL_COLOR_A, Vector4f CELL_COLOR_B, float EVAPORATE_SPEED, float DIFFUSE_SPEED, int AGENTS_COUNT, float CELL_B_PROBABILITY, SpawnMode SPAWN_MODE, float SENSOR_ANGLE_SPACING_A, float TURN_SPEED_A, float SENSOR_OFFSET_DISTANCE_A, int SENSOR_SIZE_A, float SENSOR_ANGLE_SPACING_B, float TURN_SPEED_B, float SENSOR_OFFSET_DISTANCE_B, int SENSOR_SIZE_B) {
         this.WIDTH = WIDTH;
         this.HEIGHT = HEIGHT;
+        this.WINDOW_WIDTH = WINDOW_WIDTH;
+        this.WINDOW_HEIGHT = WINDOW_HEIGHT;
         this.CELL_COLOR_A = CELL_COLOR_A;
         this.CELL_COLOR_B = CELL_COLOR_B;
         this.EVAPORATE_SPEED = EVAPORATE_SPEED;
@@ -136,5 +142,13 @@ public class Parameters {
 
     public int getSENSOR_SIZE_B() {
         return SENSOR_SIZE_B;
+    }
+
+    public int getWINDOW_WIDTH() {
+        return WINDOW_WIDTH;
+    }
+
+    public int getWINDOW_HEIGHT() {
+        return WINDOW_HEIGHT;
     }
 }

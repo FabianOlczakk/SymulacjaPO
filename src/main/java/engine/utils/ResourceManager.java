@@ -55,8 +55,7 @@ public class ResourceManager {
         }
     }
 
-    public static JTextField[] loadIntParametersFromFile(Properties properties) {
-        JTextField[] intValues = new JTextField[9];
+    public static JTextField[] loadIntParametersFromFile(Properties properties, JTextField[] intValues) {
 
         for (int i = 0; i < intValues.length; i++) {
             String value = properties.getProperty("intValues_" + i);
@@ -68,8 +67,7 @@ public class ResourceManager {
         return intValues;
     }
 
-    public static JTextField[] loadFloatParametersFromFile(Properties properties) {
-        JTextField[] floatValues = new JTextField[7];
+    public static JTextField[] loadFloatParametersFromFile(Properties properties, JTextField[] floatValues) {
 
         for (int i = 0; i < floatValues.length; i++) {
             String value = properties.getProperty("floatValues_" + i);
@@ -81,8 +79,7 @@ public class ResourceManager {
         return floatValues;
     }
 
-    public static JTextField[] loadVectorParametersFromFile(Properties properties) {
-        JTextField[] vectorValues = new JTextField[2];
+    public static JTextField[] loadVectorParametersFromFile(Properties properties, JTextField[] vectorValues) {
 
         for (int i = 0; i < vectorValues.length; i++) {
             String value = properties.getProperty("vectorValues_" + i);
@@ -94,8 +91,7 @@ public class ResourceManager {
         return vectorValues;
     }
 
-    public static JComboBox loadSpawnModeParameterFromFile(Properties properties) {
-        JComboBox spawnmode = new JComboBox();
+    public static JComboBox loadSpawnModeParameterFromFile(Properties properties, JComboBox spawnmode) {
 
         String selectedSpawnMode = properties.getProperty("spawnMode");
         if (selectedSpawnMode != null) {

@@ -22,6 +22,8 @@ public class Main {
         Parameters simulationParameters = new Parameters(
                 2560,
                 1440,
+                1920,
+                1080,
                 new Vector4f(0.4f, 0.3f, 0.3f, 1.0f),
                 new Vector4f(0.3f, 0.6f, 0.5f, 1.0f),
                 0.001f,
